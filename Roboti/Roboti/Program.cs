@@ -9,9 +9,10 @@ namespace Roboti
 {
     class Program
     {
+      public static string alegere;
         static void Main(string[] args)
         {
-
+            
             Console.WriteLine("Din momentul acesta esti stapanul turmei de roboti");
             Console.WriteLine("Pentru ca robotii sa se deplaseze trebuie sa tastezi Valea");
             Console.WriteLine("Pentru ca robotii sa manuiasca obiecte trebuie sa tastezi Pregatiti-va");
@@ -35,28 +36,25 @@ namespace Roboti
 
 
             Console.WriteLine("Doriti sa continuati DA sau NU");
-            
+
             do
             {
-                while (Console.ReadLine().ToUpper() != "DA" && Console.ReadLine().ToUpper() != "NU")
-                {
-                    string x = Console.ReadLine().ToUpper();
-                    if (x != "DA" && x != "NU")
-                    {
-                        Console.WriteLine("Alegere gresita! Trebuie sa scrieti DA sau NU");
-                    }
-                } 
-                
-                
+                alegere = Console.ReadLine().ToUpper();
+                ValidareAlegere(alegere);
+
+
 
                 Console.WriteLine("acum alegeti una din comenzile VALEA, PREGATIITI-VA sau MUNCITI");
-                string alegere = Console.ReadLine().ToUpper();
+                alegere = Console.ReadLine().ToUpper();
                 if (alegere == "VALEA")
                 {
                     foreach (var rZ in roboti)
                     {
                         rZ.Deplasare();
                     }
+                    Console.WriteLine("Doriti sa continuati? Da sau NU?");
+                    alegere = Console.ReadLine().ToUpper();
+                    ValidareAlegere(alegere);
                 }
                 else
                 {
@@ -67,6 +65,9 @@ namespace Roboti
                             if (s is RobotTerestru || s is RobotZburator)
                                 s.InhataObiect();
                         }
+                        Console.WriteLine("Doriti sa continuati? Da sau NU?");
+                        alegere = Console.ReadLine().ToUpper();
+                        ValidareAlegere(alegere);
                     }
                     else
                     {
@@ -77,17 +78,35 @@ namespace Roboti
                                 if (i is RobotTerestru || i is RobotZburator)
                                     i.Actiune();
                             }
+                            Console.WriteLine("Doriti sa continuati? Da sau NU?");
+                            alegere = Console.ReadLine().ToUpper();
+                            ValidareAlegere(alegere);
                         }
                         else
                         {
                             Console.WriteLine("Doriti sa continuati ? Da sau Nu");
+                            alegere = Console.ReadLine().ToUpper();
+                            ValidareAlegere(alegere);
                         }
                     }
                 }
 
 
             }
-            while (Console.ReadLine().ToUpper() == "DA");
+            while (alegere == "DA");
+        }
+
+        private static void ValidareAlegere(string mesaj)
+        {
+           
+            while (mesaj != "DA" && mesaj != "NU")
+            {
+                //string x = Console.ReadLine().ToUpper();
+                if (mesaj != "DA" && mesaj != "NU")
+                {
+                    Console.WriteLine("Alegere gresita! Trebuie sa scrieti DA sau NU");
+                }
+            }
         }
 
        
