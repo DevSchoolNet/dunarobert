@@ -8,10 +8,7 @@ namespace AnonymusMethod
 {
     class Program
     {
-        public static bool IsUnderThirty(Employee e)
-        {
-            return e.Age < 30;
-        }
+       
 
         static void Main(string[] args)
         {
@@ -23,8 +20,8 @@ namespace AnonymusMethod
                new Employee(){Name = "Marian",Age=25,Occupation = "WebDeveloper"},
            };
 
-            Predicate<Employee> callback = IsUnderThirty;
-            List<Employee> employeeUnderThirty = listofEmployees.FindAll(callback);
+
+            List<Employee> employeeUnderThirty = listofEmployees.FindAll(delegate(Employee e) { return e.Age < 30; });
             foreach (Employee e in employeeUnderThirty)
             {
                 Console.WriteLine("{0} are sub 30 de ani", e.Name);
